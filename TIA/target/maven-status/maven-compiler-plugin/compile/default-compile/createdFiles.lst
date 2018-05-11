@@ -1,0 +1,9 @@
+com\mack\tia\conf\JPAConfiguration.class
+com\mack\tia\conf\ServletSpringMVC.class
+com\mack\tia\controller\validator\UserSignUpValidator.class
+com\mack\tia\model\User.class
+com\mack\tia\constant\Profile.class
+com\mack\tia\conf\AppWebConfiguration.class
+com\mack\tia\controller\LoginController.class
+com\mack\tia\controller\dao\LoginDAO.class
+com\mack\tia\controller\UserActivationController.class
