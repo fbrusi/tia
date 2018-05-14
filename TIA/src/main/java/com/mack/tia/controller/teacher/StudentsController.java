@@ -38,21 +38,25 @@ public class StudentsController {
 		User loggedUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		view.addObject("subjects", schoolSubjectDAO.getSubjectsByTeacher(loggedUser));
 
-		if(schoolSubject != null && schoolSubject.getId() != null) {
+		if(schoolSubject != null && schoolSubject.getId() != null && schoolSubject.getId().intValue() != 0) {
 			
 			SchoolSubject managedSchoolSubject = schoolSubjectDAO.getSchoolSubjectByIdWithStudents(schoolSubject.getId());
 			List<User> allStudents = studentDAO.getAllStudents();
 			List<User> studentsToDisplay = new ArrayList<>();
+			List<User> registeredStudents = new ArrayList<>();
 			
 			for(User studend : allStudents) {
 				
 				if(!managedSchoolSubject.getStudents().contains(studend)) {
 					studentsToDisplay.add(studend);
 				}
+				else {
+					registeredStudents.add(studend);
+				}
 			}
 			
 			view.addObject("students", studentsToDisplay);
-			view.addObject("schoolSubject", schoolSubject);
+			view.addObject("registeredStudents", registeredStudents);
 		}
 		
 		return view;

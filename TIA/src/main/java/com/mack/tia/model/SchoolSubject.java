@@ -48,6 +48,10 @@ public class SchoolSubject {
 	public String getSubject() {
 		return subject;
 	}
+	
+	public String getSubjectForDisplay() {
+		return "(" + semester + "º Semestre) - " + subject;
+	}
 
 	public void setSubject(String subject) {
 		this.subject = subject;
