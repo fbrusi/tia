@@ -68,10 +68,7 @@
 					</tr>
 				</c:if>
 			</table>
-			<c:if test="${alertMessage != null }">
-				<div class="tia-g-alert-message"><b>${alertMessage}</b></div>
-			</c:if>
-			<br/>
+
 			<c:choose>
 				<c:when test="${fn:length(registeredStudents) eq 0}">
 					<h3>Não há alunos cadastrados nesta matéria.</h3>
@@ -96,11 +93,6 @@
 				</c:otherwise>
 			</c:choose>
 		</form:form>
-		
-		<br/>
-		<c:if test="${alertMessage != null }">
-			<div class="tia-g-alert-message"><b>${alertMessage}</b></div>
-		</c:if>
 		
 		<form:form action='${spring:mvcUrl("SC#addStudent").build()}' method="post" commandName="schoolSubject" id="addStudentForm">
 			<form:hidden path="id" id="inputSelectedSubject"/>

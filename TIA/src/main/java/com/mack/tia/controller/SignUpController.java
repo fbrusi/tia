@@ -68,6 +68,7 @@ public class SignUpController {
 		user.setActivationKey(String.valueOf(new Random().nextLong()).replaceAll("-", ""));
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		
+		roleDAO.initializeRoles();
 		user.setRole(roleDAO.getRoleById(user.getRole().getAuthority()));
 		userDAO.save(user);
 		
@@ -78,7 +79,8 @@ public class SignUpController {
 		email.setText("Acesse http://localhost:8080/tia/nonlogged/activate?activationKey=" + user.getActivationKey() + " para ativar a sua conta.");
 		//mailer.send(email);
 		
-		redirectAttributes.addFlashAttribute("alertMessage", "Usuário cadastrado com sucesso! Favor ativar a conta através do link enviado por e-mail.");
+		//redirectAttributes.addFlashAttribute("alertMessage", "Usuário cadastrado com sucesso! Favor ativar a conta através do link enviado por e-mail.");
+		redirectAttributes.addFlashAttribute("alertMessage", "Acesse http://localhost:8080/tia/nonlogged/activate?activationKey=" + user.getActivationKey() + " para ativar a sua conta.");
 		
 		ModelAndView modelAndView = new ModelAndView("redirect:login");
 		return modelAndView;

@@ -76,7 +76,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 		<a class="w3-bar-item w3-button w3-hover-black" href="home">Home</a>
 		<a class="w3-bar-item w3-button w3-hover-black" href="schoolSubject">Matérias</a>
 		<a class="w3-bar-item w3-button w3-hover-black" href="students">Alunos</a>
-		<a class="w3-bar-item w3-button w3-hover-black" href="#">Notas</a>
+		<a class="w3-bar-item w3-button w3-hover-black" href="grades">Notas</a>
 	</nav>
 
 	<!-- Overlay effect when opening sidebar on small screens -->

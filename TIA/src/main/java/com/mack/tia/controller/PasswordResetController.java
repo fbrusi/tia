@@ -65,7 +65,8 @@ public class PasswordResetController {
 		}
 		
 		ModelAndView modelAndView = new ModelAndView("redirect:login");
-		redirectAttributes.addFlashAttribute("alertMessage", "Link de reset de senha enviado para o e-mail.");
+		//redirectAttributes.addFlashAttribute("alertMessage", "Link de reset de senha enviado para o e-mail.");
+		redirectAttributes.addFlashAttribute("alertMessage", "Acesse http://localhost:8080/tia/nonlogged/resetPassword?passwordResetKey=" + user.getPasswordResetKey() + " para reiniciar sua senha.");
 		
 		return modelAndView;
 	}

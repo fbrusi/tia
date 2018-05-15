@@ -19,7 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class User implements UserDetails {
+public class User implements UserDetails, Comparable<User> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -54,13 +54,13 @@ public class User implements UserDetails {
 	@Column(unique = true)
 	private String passwordResetKey;
 	
-//	@NotNull(message = "{field.required}")
-//	@Enumerated(EnumType.STRING)
-//	@Column(nullable = false, updatable = false)
-//	private Profile profile;
-	
 	@Transient
 	private String passwordConfirm;
+
+	@Override
+	public int compareTo(User o) {
+		return this.name.compareTo(o.name);
+	}
 	
 	@Override
 	public int hashCode() {
