@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mack.tia.controller.validator.SchoolSubjectValidator;
 import com.mack.tia.dao.SchoolSubjectDAO;
 import com.mack.tia.dao.UserDAO;
 import com.mack.tia.model.SchoolSubject;
@@ -28,6 +31,14 @@ public class SchoolSubjectController {
 	
 	@Autowired
 	private SchoolSubjectDAO schoolSubjectDAO;
+	
+	@Autowired
+	private SchoolSubjectValidator schoolSubjectValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(schoolSubjectValidator);
+	}
 	
 	@RequestMapping(value = "/schoolSubject")
 	public ModelAndView accessSchoolSubjectView(SchoolSubject schoolSubject) {
@@ -46,10 +57,6 @@ public class SchoolSubjectController {
 	public ModelAndView registerNewSubject(@Valid SchoolSubject schoolSubject, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		
 		if(bindingResult.hasErrors()) {
-			
-			schoolSubject.setSubject("");
-			schoolSubject.setSemester(1);
-			
 			return accessSchoolSubjectView(schoolSubject);
 		}
 		

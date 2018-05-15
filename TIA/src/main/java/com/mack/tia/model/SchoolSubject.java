@@ -34,6 +34,21 @@ public class SchoolSubject {
 	
 	private int semester;
 	
+	@NotEmpty(message = "{field.required}")
+	private String gradeA;
+	
+	@NotEmpty(message = "{field.required}")
+	private String gradeB;
+	
+	@NotEmpty(message = "{field.required}")
+	private String gradeC;
+	
+	@NotEmpty(message = "{field.required}")
+	private String gradeD;
+	
+	@NotEmpty(message = "{field.required}")
+	private String gradePF;
+	
 	@Transient
 	private BigInteger studentId;
 
@@ -87,5 +102,45 @@ public class SchoolSubject {
 
 	public void setStudentId(BigInteger studentId) {
 		this.studentId = studentId;
+	}
+
+	public String getGradeA() {
+		return gradeA;
+	}
+
+	public void setGradeA(String gradeA) {
+		this.gradeA = gradeA;
+	}
+
+	public String getGradeB() {
+		return gradeB;
+	}
+
+	public void setGradeB(String gradeB) {
+		this.gradeB = gradeB;
+	}
+
+	public String getGradeC() {
+		return gradeC;
+	}
+
+	public void setGradeC(String gradeC) {
+		this.gradeC = gradeC;
+	}
+
+	public String getGradeD() {
+		return gradeD;
+	}
+
+	public void setGradeD(String gradeD) {
+		this.gradeD = gradeD;
+	}
+
+	public String getGradePF() {
+		return gradePF;
+	}
+
+	public void setGradePF(String gradePF) {
+		this.gradePF = gradePF;
 	}
 }

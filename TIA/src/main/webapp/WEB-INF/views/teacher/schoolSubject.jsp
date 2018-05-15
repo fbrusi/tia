@@ -19,16 +19,41 @@
 				<td><label for="semester">Semestre: </label></td>
 				<td>
 					<form:select path="semester">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-						<option>7</option>
-						<option>8</option>
+						<form:option value="1">1º</form:option>
+						<form:option value="2">2º</form:option>
+						<form:option value="3">3º</form:option>
+						<form:option value="4">4º</form:option>
+						<form:option value="5">5º</form:option>
+						<form:option value="6">6º</form:option>
+						<form:option value="7">7º</form:option>
+						<form:option value="8">8º</form:option>
 					</form:select>
 				</td>
+			</tr>
+			<tr>
+				<td><label for="gradeA">Peso nota A: </label></td>
+				<td><form:input type="number" path="gradeA" id="gradeA" /> %</td>
+				<td><form:errors path="gradeA" cssClass="tia-alert-message" /></td>
+			</tr>
+			<tr>
+				<td><label for="gradeB">Peso nota B: </label></td>
+				<td><form:input type="number" path="gradeB" id="gradeB" /> %</td>
+				<td><form:errors path="gradeB" cssClass="tia-alert-message" /></td>
+			</tr>
+			<tr>
+				<td><label for="gradeC">Peso nota C: </label></td>
+				<td><form:input type="number" path="gradeC" id="gradeC" /> %</td>
+				<td><form:errors path="gradeC" cssClass="tia-alert-message" /></td>
+			</tr>
+			<tr>
+				<td><label for="gradeD">Peso nota D: </label></td>
+				<td><form:input type="number" path="gradeD" id="gradeD" /> %</td>
+				<td><form:errors path="gradeD" cssClass="tia-alert-message" /></td>
+			</tr>
+			<tr>
+				<td><label for="gradePF">Peso nota PF: </label></td>
+				<td><form:input type="number" path="gradePF" id="gradePF" /> %</td>
+				<td><form:errors path="gradePF" cssClass="tia-alert-message" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right"><input type="submit" value="Cadastrar"></td>
@@ -40,8 +65,13 @@
 	<h3>Gerenciar matérias:</h3>
 	<table>
 		<tr class="tia-table-title" align="center">
-			<td width="400px;">Matéria</td>
+			<td width="300px;">Matéria</td>
 			<td width="90px;">Semestre</td>
+			<td width="90px;">Nota A (%)</td>
+			<td width="90px;">Nota B (%)</td>
+			<td width="90px;">Nota C (%)</td>
+			<td width="90px;">Nota D (%)</td>
+			<td width="90px;">Nota PF (%)</td>
 			<td width="90px;">Remover</td>
 		</tr>
 		<c:forEach items="${subjects}" var="subject" varStatus="status">
@@ -49,7 +79,16 @@
 			<c:if test="${status.index % 2 == 0}"><tr></c:if>
 				<td>${subject.subject}</td>
 				<td align="center">${subject.semester}</td>
-				<td align="center"><a href="removeSubject?id=${subject.id}" onclick="return confirm('Confirma a remoção da matéria?')"><img alt="Remover" width="10px" src="/tia/resources/remove.png"> </a></td>
+				<td align="center">${subject.gradeA}</td>
+				<td align="center">${subject.gradeB}</td>
+				<td align="center">${subject.gradeC}</td>
+				<td align="center">${subject.gradeD}</td>
+				<td align="center">${subject.gradePF}</td>
+				<td align="center">
+					<a href="removeSubject?id=${subject.id}" onclick="return confirm('Confirma a remoção da matéria?')">
+						<img alt="Remover" width="10px" src="/tia/resources/remove.png">
+					</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
