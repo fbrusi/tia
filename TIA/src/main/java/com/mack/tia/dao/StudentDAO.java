@@ -16,9 +16,9 @@ public class StudentDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	public List<User> getAllStudents() {
+	public List<User> getAllActiveStudents() {
 		
-		TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.role.name = 'ROLE_ALUNO' ORDER BY name", User.class);
+		TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.role.name = 'ROLE_ALUNO' AND enabled = true ORDER BY name", User.class);
 		return query.getResultList();
 	}
 }

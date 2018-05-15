@@ -36,10 +36,7 @@
 			</tr>
 		</table>
 	</form:form>
-	<c:if test="${alertMessage != null }">
-		<div class="tia-g-alert-message"><b>${alertMessage}</b></div>
-	</c:if>
-	<br/>
+	
 	<h3>Gerenciar matérias:</h3>
 	<table>
 		<tr class="tia-table-title" align="center">
@@ -56,4 +53,8 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<br/>
+	<c:if test="${alertMessage != null }">
+		<div class="tia-g-alert-message"><b>${alertMessage}</b></div>
+	</c:if>
 </cdc:teacher>

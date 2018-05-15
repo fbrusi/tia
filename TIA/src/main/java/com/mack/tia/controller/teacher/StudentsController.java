@@ -3,6 +3,8 @@ package com.mack.tia.controller.teacher;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -41,7 +43,7 @@ public class StudentsController {
 		if(schoolSubject != null && schoolSubject.getId() != null && schoolSubject.getId().intValue() != 0) {
 			
 			SchoolSubject managedSchoolSubject = schoolSubjectDAO.getSchoolSubjectByIdWithStudents(schoolSubject.getId());
-			List<User> allStudents = studentDAO.getAllStudents();
+			List<User> allStudents = studentDAO.getAllActiveStudents();
 			List<User> studentsToDisplay = new ArrayList<>();
 			List<User> registeredStudents = new ArrayList<>();
 			
@@ -60,5 +62,25 @@ public class StudentsController {
 		}
 		
 		return view;
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/addStudent", method = RequestMethod.POST)
+	public ModelAndView addStudent(SchoolSubject schoolSubject, RedirectAttributes redirectAttributes) {
+		
+		User loggedUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		SchoolSubject managedSchoolSubject = schoolSubjectDAO.getSchoolSubjectById(schoolSubject.getId());
+		
+		if(loggedUser.equals(managedSchoolSubject.getTeacher())) {
+			
+			User student = userDAO.getUserById(schoolSubject.getStudentId());
+			managedSchoolSubject.getStudents().add(student);
+			
+			schoolSubjectDAO.update(managedSchoolSubject);
+			
+			redirectAttributes.addFlashAttribute("alertMessage", "Estudante associado à matéria com sucesso!");
+		}
+		
+		return loadView(schoolSubject);
 	}
 }

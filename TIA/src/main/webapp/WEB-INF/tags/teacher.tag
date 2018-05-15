@@ -1,6 +1,8 @@
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%@attribute name="extraScripts" fragment="true" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -124,6 +126,8 @@ html, body, h1, h2, h3, h4, h5, h6 {
 			overlayBg.style.display = "none";
 		}
 	</script>
+	
+	<jsp:invoke fragment="extraScripts" />
 
 </body>
 </html>
