@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mack.tia.dao.SchoolSubjectDAO;
 import com.mack.tia.dao.StudentDAO;
@@ -66,7 +65,7 @@ public class StudentsController {
 	
 	@Transactional
 	@RequestMapping(value = "/addStudent", method = RequestMethod.POST)
-	public ModelAndView addStudent(SchoolSubject schoolSubject, RedirectAttributes redirectAttributes) {
+	public ModelAndView addStudent(SchoolSubject schoolSubject) {
 		
 		User loggedUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		SchoolSubject managedSchoolSubject = schoolSubjectDAO.getSchoolSubjectById(schoolSubject.getId());
@@ -77,8 +76,24 @@ public class StudentsController {
 			managedSchoolSubject.getStudents().add(student);
 			
 			schoolSubjectDAO.update(managedSchoolSubject);
+		}
+		
+		return loadView(schoolSubject);
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/removeStudent", method = RequestMethod.POST)
+	public ModelAndView removeStudent(SchoolSubject schoolSubject) {
+		
+		User loggedUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		SchoolSubject managedSchoolSubject = schoolSubjectDAO.getSchoolSubjectById(schoolSubject.getId());
+		
+		if(loggedUser.equals(managedSchoolSubject.getTeacher())) {
 			
-			redirectAttributes.addFlashAttribute("alertMessage", "Estudante associado à matéria com sucesso!");
+			User student = userDAO.getUserById(schoolSubject.getStudentId());
+			managedSchoolSubject.getStudents().remove(student);
+			
+			schoolSubjectDAO.update(managedSchoolSubject);
 		}
 		
 		return loadView(schoolSubject);

@@ -16,6 +16,17 @@
 				
 				document.getElementById('addStudentForm').submit();
 			}
+			
+			function removeStudent(selectedStudent) {
+				
+				if(confirm('Confirma a remoção do estudante?')) {
+					
+					document.getElementById('selectedSubjectToRemoveStudent').value = document.getElementById('selectedSubject').value;
+					document.getElementById('selectedStudentToRemove').value = selectedStudent;
+					
+					document.getElementById('removeStudentForm').submit();
+				}
+			}
 		</script>
 	</jsp:attribute>
 
@@ -78,7 +89,7 @@
 							<c:if test="${status.index % 2 == 0}"><tr></c:if>
 								<td>${registeredStudent.name}</td>
 								<td>${registeredStudent.username}</td>
-								<td align="center"><a href="removeStudent?id=${registeredStudent.id}" onclick="return confirm('Confirma a remoção do aluno desta matéria?')"><img alt="Remover" width="10px" src="/tia/resources/remove.png"> </a></td>
+								<td align="center"><a href="javascript:removeStudent('${registeredStudent.id}')"><img alt="Remover" width="10px" src="/tia/resources/remove.png"></a></td>
 							</tr>
 						</c:forEach>
 					</table>	
@@ -94,6 +105,11 @@
 		<form:form action='${spring:mvcUrl("SC#addStudent").build()}' method="post" commandName="schoolSubject" id="addStudentForm">
 			<form:hidden path="id" id="inputSelectedSubject"/>
 			<form:hidden path="studentId" id="inputSelectedStudent"/>
+		</form:form>
+		
+		<form:form action='${spring:mvcUrl("SC#removeStudent").build()}' method="post" commandName="schoolSubject" id="removeStudentForm">
+			<form:hidden path="id" id="selectedSubjectToRemoveStudent"/>
+			<form:hidden path="studentId" id="selectedStudentToRemove"/>
 		</form:form>
 	</jsp:body>
 </cdc:teacher>
