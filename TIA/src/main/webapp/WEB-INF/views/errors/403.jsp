@@ -1,1 +1,1 @@
-<h1>Acesso negado</h1>
+<h2>Por favor faça login novamente.</h2>

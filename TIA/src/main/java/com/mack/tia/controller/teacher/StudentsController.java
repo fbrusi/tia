@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mack.tia.dao.GradeDAO;
 import com.mack.tia.dao.SchoolSubjectDAO;
 import com.mack.tia.dao.StudentDAO;
 import com.mack.tia.dao.UserDAO;
@@ -30,6 +31,9 @@ public class StudentsController {
 	
 	@Autowired
 	private StudentDAO studentDAO;
+	
+	@Autowired
+	private GradeDAO gradeDAO;
 
 	@RequestMapping(value = "/students")
 	public ModelAndView loadView(SchoolSubject schoolSubject) {
@@ -76,6 +80,7 @@ public class StudentsController {
 			managedSchoolSubject.getStudents().add(student);
 			
 			schoolSubjectDAO.update(managedSchoolSubject);
+			gradeDAO.addGrade(managedSchoolSubject, student);
 		}
 		
 		return loadView(schoolSubject);
@@ -94,6 +99,7 @@ public class StudentsController {
 			managedSchoolSubject.getStudents().remove(student);
 			
 			schoolSubjectDAO.update(managedSchoolSubject);
+			gradeDAO.removeGrade(managedSchoolSubject, student);
 		}
 		
 		return loadView(schoolSubject);
