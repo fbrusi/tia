@@ -68,30 +68,29 @@
 					</tr>
 				</c:if>
 			</table>
+			
+			<c:if test="${fn:length(registeredStudents) eq 0 and ((schoolSubject.id ne 0) and (not empty schoolSubject.id))}">
+				<h3>Não há alunos cadastrados nesta matéria.</h3>
+			</c:if>
 
-			<c:choose>
-				<c:when test="${fn:length(registeredStudents) eq 0}">
-					<h3>Não há alunos cadastrados nesta matéria.</h3>
-				</c:when>
-				<c:otherwise>
-					<h3>Alunos cadastrados:</h3>
-					<table>
-						<tr class="tia-table-title" align="center">
-							<td width="300px;">Aluno</td>
-							<td width="300px;">E-mail</td>
-							<td width="90px;">Remover</td>
+			<c:if test="${fn:length(registeredStudents) ne 0}">
+				<h3>Alunos cadastrados:</h3>
+				<table>
+					<tr class="tia-table-title" align="center">
+						<td width="300px;">Aluno</td>
+						<td width="300px;">E-mail</td>
+						<td width="90px;">Remover</td>
+					</tr>
+					<c:forEach items="${registeredStudents}" var="registeredStudent" varStatus="status">
+						<c:if test="${status.index % 2 != 0}"><tr class="tia-table-even"></c:if>
+						<c:if test="${status.index % 2 == 0}"><tr></c:if>
+							<td>${registeredStudent.name}</td>
+							<td>${registeredStudent.username}</td>
+							<td align="center"><a href="javascript:removeStudent('${registeredStudent.id}')"><img alt="Remover" width="10px" src="/tia/resources/remove.png"></a></td>
 						</tr>
-						<c:forEach items="${registeredStudents}" var="registeredStudent" varStatus="status">
-							<c:if test="${status.index % 2 != 0}"><tr class="tia-table-even"></c:if>
-							<c:if test="${status.index % 2 == 0}"><tr></c:if>
-								<td>${registeredStudent.name}</td>
-								<td>${registeredStudent.username}</td>
-								<td align="center"><a href="javascript:removeStudent('${registeredStudent.id}')"><img alt="Remover" width="10px" src="/tia/resources/remove.png"></a></td>
-							</tr>
-						</c:forEach>
-					</table>	
-				</c:otherwise>
-			</c:choose>
+					</c:forEach>
+				</table>	
+			</c:if>
 		</form:form>
 		
 		<form:form action='${spring:mvcUrl("SC#addStudent").build()}' method="post" commandName="schoolSubject" id="addStudentForm">

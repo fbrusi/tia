@@ -31,7 +31,6 @@
 		</c:if>
 	</form:form>
 	
-	<fmt:setLocale value="pt_BR"/>
 	<c:if test="${fn:length(gradeForm.grades) ne 0}">
 		<form:form action='${spring:mvcUrl("GC#updateGrades").build()}' method="post" commandName="gradeForm">
 			<h3>Boletim:</h3>
