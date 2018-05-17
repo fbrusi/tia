@@ -7,6 +7,9 @@
 		<c:if test="${alertMessage != null }">
 			<div class="tia-g-alert-message"><b>${alertMessage}</b></div>
 		</c:if>	
+			<c:if test="${param.error != null}">
+		     <div class="tia-g-alert-message"><b>Credenciais inválidas.</b></div>
+		</c:if>
 
 		<h1 class="w3-text-teal">Acessar sistema TIA</h1>
 		<table>
@@ -35,4 +38,5 @@
 			</tr>
 		</table>				
 	</form:form>
+
 </cdc:nonLogged>
