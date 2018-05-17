@@ -37,6 +37,15 @@ html, body, h1, h2, h3, h4, h5, h6 {
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
+
+.tia-table-title {
+	background-color: gray;
+	color: white;
+}
+
+.tia-table-even {
+	background-color: lightgray;
+}
 </style>
 
 <body>
@@ -62,14 +71,14 @@ html, body, h1, h2, h3, h4, h5, h6 {
 			<b>Boletins</b>
 		</h4>
 		<a class="w3-bar-item w3-button w3-hover-black" href="home">Home</a>
-		<a class="w3-bar-item w3-button w3-hover-black" href="#">1º Semestre</a>
-		<a class="w3-bar-item w3-button w3-hover-black" href="#">2º Semestre</a>
-		<a class="w3-bar-item w3-button w3-hover-black" href="#">3º Semestre</a>
-		<a class="w3-bar-item w3-button w3-hover-black" href="#">4º Semestre</a>
-		<a class="w3-bar-item w3-button w3-hover-black" href="#">5º Semestre</a>
-		<a class="w3-bar-item w3-button w3-hover-black" href="#">6º Semestre</a>
-		<a class="w3-bar-item w3-button w3-hover-black" href="#">7º Semestre</a>
-		<a class="w3-bar-item w3-button w3-hover-black" href="#">8º Semestre</a> 
+		<a class="w3-bar-item w3-button w3-hover-black" href="report?semester=1">1º Semestre</a>
+		<a class="w3-bar-item w3-button w3-hover-black" href="report?semester=2">2º Semestre</a>
+		<a class="w3-bar-item w3-button w3-hover-black" href="report?semester=3">3º Semestre</a>
+		<a class="w3-bar-item w3-button w3-hover-black" href="report?semester=4">4º Semestre</a>
+		<a class="w3-bar-item w3-button w3-hover-black" href="report?semester=5">5º Semestre</a>
+		<a class="w3-bar-item w3-button w3-hover-black" href="report?semester=6">6º Semestre</a>
+		<a class="w3-bar-item w3-button w3-hover-black" href="report?semester=7">7º Semestre</a>
+		<a class="w3-bar-item w3-button w3-hover-black" href="report?semester=8">8º Semestre</a> 
 	</nav>
 
 	<!-- Overlay effect when opening sidebar on small screens -->

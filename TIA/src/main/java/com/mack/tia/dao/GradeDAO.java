@@ -49,4 +49,13 @@ public class GradeDAO {
 	public void updateGrade(Grade grade) {
 		entityManager.merge(grade);
 	}
+	
+	public List<Grade> getGradesBySemester(User student, int semester) {
+		
+		TypedQuery<Grade> query = entityManager.createQuery("SELECT g FROM Grade g WHERE g.student = :student AND g.schoolSubject.semester = :semester", Grade.class);
+		query.setParameter("student", student);
+		query.setParameter("semester", semester);
+		
+		return query.getResultList();
+	}
 }

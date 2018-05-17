@@ -12,7 +12,7 @@
 		<table>
 			<tr>
 				<td><label for="username">Login: </label></td>
-				<td><input type="text" name="username" id="username" ></td>
+				<td><input type="text" name="username" id="username" maxlength="50" ></td>
 				<td><form:errors path="username" />  </td>
 			</tr>
 			<tr>

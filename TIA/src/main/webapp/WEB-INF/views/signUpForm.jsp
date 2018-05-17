@@ -9,12 +9,12 @@
 		<table>
 			<tr>
 				<td><label for="name">Nome: </label></td>
-				<td><form:input type="text" path="name" id="name" /></td>
+				<td><form:input type="text" path="name" id="name" maxlength="50" /></td>
 				<td><form:errors path="name" cssClass="tia-alert-message" /></td>
 			</tr>
 			<tr>
 				<td><label for="username">E-mail: </label></td>
-				<td><form:input type="text" path="username" id="username" /></td>
+				<td><form:input type="text" path="username" id="username" maxlength="50" /></td>
 				<td><form:errors path="username" cssClass="tia-alert-message" /></td>
 			</tr>
 			<tr>
