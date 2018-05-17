@@ -1,5 +1,6 @@
 package com.mack.tia.model;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import javax.persistence.Column;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+
+import org.apache.commons.lang.StringUtils;
 
 @Entity
 public class Grade implements Comparable<Grade> {
@@ -33,6 +36,8 @@ public class Grade implements Comparable<Grade> {
 	private String gradeD;
 	
 	private String gradePF;
+	
+	private String average;
 	
 	@Transient
 	private boolean hasErrorGradeA;
@@ -81,6 +86,10 @@ public class Grade implements Comparable<Grade> {
 	public String getGradeA() {
 		return gradeA;
 	}
+	
+	public String getGradeAForDisplay() {
+		return StringUtils.isBlank(gradeA) || hasErrorGradeA ? "" : new BigDecimal(gradeA).setScale(1).toString();
+	}
 
 	public void setGradeA(String gradeA) {
 		this.gradeA = gradeA;
@@ -88,6 +97,10 @@ public class Grade implements Comparable<Grade> {
 
 	public String getGradeB() {
 		return gradeB;
+	}
+	
+	public String getGradeBForDisplay() {
+		return StringUtils.isBlank(gradeB) || hasErrorGradeB ? "" : new BigDecimal(gradeB).setScale(1).toString();
 	}
 
 	public void setGradeB(String gradeB) {
@@ -97,6 +110,10 @@ public class Grade implements Comparable<Grade> {
 	public String getGradeC() {
 		return gradeC;
 	}
+	
+	public String getGradeCForDisplay() {
+		return StringUtils.isBlank(gradeC) || hasErrorGradeC ? "" : new BigDecimal(gradeC).setScale(1).toString();
+	}
 
 	public void setGradeC(String gradeC) {
 		this.gradeC = gradeC;
@@ -105,6 +122,10 @@ public class Grade implements Comparable<Grade> {
 	public String getGradeD() {
 		return gradeD;
 	}
+	
+	public String getGradeDForDisplay() {
+		return StringUtils.isBlank(gradeD) || hasErrorGradeD ? "" : new BigDecimal(gradeD).setScale(1).toString();
+	}
 
 	public void setGradeD(String gradeD) {
 		this.gradeD = gradeD;
@@ -112,6 +133,10 @@ public class Grade implements Comparable<Grade> {
 
 	public String getGradePF() {
 		return gradePF;
+	}
+	
+	public String getGradePFForDisplay() {
+		return StringUtils.isBlank(gradePF) || hasErrorGradePF ? "" : new BigDecimal(gradePF).setScale(1).toString();
 	}
 
 	public void setGradePF(String gradePF) {
@@ -156,5 +181,17 @@ public class Grade implements Comparable<Grade> {
 
 	public void setHasErrorGradePF(boolean hasErrorGradePF) {
 		this.hasErrorGradePF = hasErrorGradePF;
+	}
+
+	public String getAverage() {
+		return average;
+	}
+	
+	public String getAverageForDisplay() {
+		return StringUtils.isBlank(average) ? "-" : new BigDecimal(average).setScale(1, BigDecimal.ROUND_UP).toString();
+	}
+
+	public void setAverage(String average) {
+		this.average = average;
 	}
 }

@@ -31,7 +31,7 @@
 		</c:if>
 	</form:form>
 	
-	<fmt:setLocale value="en_US" />
+	<fmt:setLocale value="pt_BR"/>
 	<c:if test="${fn:length(gradeForm.grades) ne 0}">
 		<form:form action='${spring:mvcUrl("GC#updateGrades").build()}' method="post" commandName="gradeForm">
 			<h3>Boletim:</h3>
@@ -39,26 +39,26 @@
 			<table>
 				<tr class="tia-table-title" align="center">
 					<td width="300px;">Aluno</td>
-					<c:if test="${schoolSubject.gradeA != 0}"><td width="90px;">A</td></c:if>
-					<c:if test="${schoolSubject.gradeB != 0}"><td width="90px;">B</td></c:if>
-					<c:if test="${schoolSubject.gradeC != 0}"><td width="90px;">C</td></c:if>
-					<c:if test="${schoolSubject.gradeD != 0}"><td width="90px;">D</td></c:if>
-					<c:if test="${schoolSubject.gradePF != 0}"><td width="90px;">PF</td></c:if>
+					<c:if test="${schoolSubject.gradeA != 0}"><td width="90px;">A (${schoolSubject.gradeA}%)</td></c:if>
+					<c:if test="${schoolSubject.gradeB != 0}"><td width="90px;">B (${schoolSubject.gradeB}%)</td></c:if>
+					<c:if test="${schoolSubject.gradeC != 0}"><td width="90px;">C (${schoolSubject.gradeC}%)</td></c:if>
+					<c:if test="${schoolSubject.gradeD != 0}"><td width="90px;">D (${schoolSubject.gradeD}%)</td></c:if>
+					<c:if test="${schoolSubject.gradePF != 0}"><td width="90px;">PF (${schoolSubject.gradePF}%)</td></c:if>
 					<td width="90px;">MÉDIA</td>
 				</tr>
 				<c:forEach items="${gradeForm.grades}" var="grade" varStatus="status">
 					<c:if test="${status.index % 2 != 0}"><tr class="tia-table-even"></c:if>
 					<c:if test="${status.index % 2 == 0}"><tr></c:if>
 						<td>${grade.student.name}</td>
-						<c:if test="${schoolSubject.gradeA != 0}"><td align="center"><input type="text" name="grades[${status.index}].gradeA" value="<fmt:formatNumber maxFractionDigits="1" minFractionDigits="1" value="${grade.gradeA}" />" size="1" maxlength="3" <c:if test="${grade.hasErrorGradeA}">style="background-color: #FF9999;"</c:if>/></td></c:if>
-						<c:if test="${schoolSubject.gradeB != 0}"><td align="center"><input type="text" name="grades[${status.index}].gradeB" value="<fmt:formatNumber maxFractionDigits="1" minFractionDigits="1" value="${grade.gradeB}" />" size="1" maxlength="3" <c:if test="${grade.hasErrorGradeB}">style="background-color: #FF9999;"</c:if>/></td></c:if>
-						<c:if test="${schoolSubject.gradeC != 0}"><td align="center"><input type="text" name="grades[${status.index}].gradeC" value="<fmt:formatNumber maxFractionDigits="1" minFractionDigits="1" value="${grade.gradeC}" />" size="1" maxlength="3" <c:if test="${grade.hasErrorGradeC}">style="background-color: #FF9999;"</c:if>/></td></c:if>
-						<c:if test="${schoolSubject.gradeD != 0}"><td align="center"><input type="text" name="grades[${status.index}].gradeD" value="<fmt:formatNumber maxFractionDigits="1" minFractionDigits="1" value="${grade.gradeD}" />" size="1" maxlength="3" <c:if test="${grade.hasErrorGradeD}">style="background-color: #FF9999;"</c:if>/></td></c:if>
-						<c:if test="${schoolSubject.gradePF != 0}"><td align="center"><input type="text" name="grades[${status.index}].gradePF" value="<fmt:formatNumber maxFractionDigits="1" minFractionDigits="1" value="${grade.gradePF}" />" size="1" maxlength="3" <c:if test="${grade.hasErrorGradePF}">style="background-color: #FF9999;"</c:if>/></td></c:if>
+						<c:if test="${schoolSubject.gradeA != 0}"><td align="center"><input type="text" name="grades[${status.index}].gradeA" value="${grade.gradeAForDisplay}" size="1" maxlength="3" <c:if test="${grade.hasErrorGradeA}">style="background-color: #FF9999;"</c:if>/></td></c:if>
+						<c:if test="${schoolSubject.gradeB != 0}"><td align="center"><input type="text" name="grades[${status.index}].gradeB" value="${grade.gradeBForDisplay}" size="1" maxlength="3" <c:if test="${grade.hasErrorGradeB}">style="background-color: #FF9999;"</c:if>/></td></c:if>
+						<c:if test="${schoolSubject.gradeC != 0}"><td align="center"><input type="text" name="grades[${status.index}].gradeC" value="${grade.gradeCForDisplay}" size="1" maxlength="3" <c:if test="${grade.hasErrorGradeC}">style="background-color: #FF9999;"</c:if>/></td></c:if>
+						<c:if test="${schoolSubject.gradeD != 0}"><td align="center"><input type="text" name="grades[${status.index}].gradeD" value="${grade.gradeDForDisplay}" size="1" maxlength="3" <c:if test="${grade.hasErrorGradeD}">style="background-color: #FF9999;"</c:if>/></td></c:if>
+						<c:if test="${schoolSubject.gradePF != 0}"><td align="center"><input type="text" name="grades[${status.index}].gradePF" value="${grade.gradePFForDisplay}" size="1" maxlength="3" <c:if test="${grade.hasErrorGradePF}">style="background-color: #FF9999;"</c:if>/></td></c:if>
 						<td align="center">
 							<input type="hidden" name="grades[${status.index}].student.id" value="${grade.student.id}">
 							<input type="hidden" name="grades[${status.index}].student.name" value="${grade.student.name}">
-							-
+							${grade.averageForDisplay}
 						</td>
 					</tr>
 				</c:forEach>

@@ -128,6 +128,30 @@ public class GradeController {
 						grade.setGradeC(inputGrade.getGradeC());
 						grade.setGradeD(inputGrade.getGradeD());
 						grade.setGradePF(inputGrade.getGradePF());
+						
+						if(!StringUtils.isBlank(grade.getGradePF())) {
+							
+							Double weightA = Double.valueOf(managedSchoolSubject.getGradeA());
+							Double weightB = Double.valueOf(managedSchoolSubject.getGradeB());
+							Double weightC = Double.valueOf(managedSchoolSubject.getGradeC());
+							Double weightD = Double.valueOf(managedSchoolSubject.getGradeD());
+							Double weightPF = Double.valueOf(managedSchoolSubject.getGradePF());
+							
+							Double gradeA = weightA != 0 && !StringUtils.isBlank(grade.getGradeA()) ? Double.valueOf(grade.getGradeA()) : 0;
+							Double gradeB = weightB != 0 && !StringUtils.isBlank(grade.getGradeB()) ? Double.valueOf(grade.getGradeB()) : 0;
+							Double gradeC = weightC != 0 && !StringUtils.isBlank(grade.getGradeC()) ? Double.valueOf(grade.getGradeC()) : 0;
+							Double gradeD = weightD != 0 && !StringUtils.isBlank(grade.getGradeD()) ? Double.valueOf(grade.getGradeD()) : 0;
+							Double gradePF = weightPF != 0 && !StringUtils.isBlank(grade.getGradePF()) ? Double.valueOf(grade.getGradePF()) : 0;
+							
+							Double average = ((weightA * gradeA) + (weightB * gradeB) + (weightC * gradeC) + (weightD * gradeD) + (weightPF * gradePF)) / 100;
+							
+							grade.setAverage(average.toString());
+						}
+						else {
+							grade.setAverage(null);
+						}
+						
+						break;
 					}
 				}
 				
@@ -155,12 +179,18 @@ public class GradeController {
 	
 	private boolean isValidGrade(String grade) {
 		
-		if(!StringUtils.isBlank(grade) && !BigDecimalValidator.getInstance().isValid(grade)) {
+		if(StringUtils.isBlank(grade)) {
+			return true;
+		}
+		
+		try {
+			new BigDecimal(grade);
+		} 
+		catch(NumberFormatException e) {
 			return false;
 		}
-		else if(!StringUtils.isBlank(grade) && 
-				BigDecimalValidator.getInstance().isValid(grade) && 
-				!BigDecimalValidator.getInstance().isInRange(new BigDecimal(grade), 0, 10)) {
+		
+		if(!BigDecimalValidator.getInstance().isInRange(new BigDecimal(grade), 0, 10)) {
 			return false;
 		}
 		
