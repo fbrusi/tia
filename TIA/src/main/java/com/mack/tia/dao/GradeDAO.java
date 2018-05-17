@@ -46,6 +46,14 @@ public class GradeDAO {
 		query.executeUpdate();
 	}
 	
+	public void removeGrade(SchoolSubject schoolSubject) {
+		
+		Query query = entityManager.createQuery("DELETE FROM Grade g WHERE g.schoolSubject = :schoolSubject");
+		query.setParameter("schoolSubject", schoolSubject);
+		
+		query.executeUpdate();
+	}
+	
 	public void updateGrade(Grade grade) {
 		entityManager.merge(grade);
 	}

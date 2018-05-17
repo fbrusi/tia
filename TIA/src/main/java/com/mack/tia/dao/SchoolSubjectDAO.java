@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mack.tia.model.SchoolSubject;
@@ -17,6 +18,9 @@ public class SchoolSubjectDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	@Autowired
+	private GradeDAO gradeDAO;
 	
 	public void save(SchoolSubject schoolSubject) {
 		entityManager.persist(schoolSubject);
@@ -31,6 +35,8 @@ public class SchoolSubjectDAO {
 	}
 	
 	public void removeSubject(SchoolSubject schoolSubject) {
+		
+		gradeDAO.removeGrade(schoolSubject);
 		entityManager.remove(schoolSubject);
 	}
 	
