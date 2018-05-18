@@ -12,7 +12,7 @@
 		<table>
 			<tr>
 				<td><label for="subject">Matéria: </label></td>
-				<td><form:input type="text" path="subject" id="subject" /></td>
+				<td><form:input type="text" path="subject" id="subject" maxlength="50" /></td>
 				<td><form:errors path="subject" cssClass="tia-alert-message" /></td>
 			</tr>
 			<tr>
@@ -67,11 +67,11 @@
 		<tr class="tia-table-title" align="center">
 			<td width="300px;">Matéria</td>
 			<td width="90px;">Semestre</td>
-			<td width="90px;">Nota A (%)</td>
-			<td width="90px;">Nota B (%)</td>
-			<td width="90px;">Nota C (%)</td>
-			<td width="90px;">Nota D (%)</td>
-			<td width="90px;">Nota PF (%)</td>
+			<td width="90px;">Peso A (%)</td>
+			<td width="90px;">Peso B (%)</td>
+			<td width="90px;">Peso C (%)</td>
+			<td width="90px;">Peso D (%)</td>
+			<td width="90px;">Peso PF (%)</td>
 			<td width="90px;">Remover</td>
 		</tr>
 		<c:forEach items="${subjects}" var="subject" varStatus="status">

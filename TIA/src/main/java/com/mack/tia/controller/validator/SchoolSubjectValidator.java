@@ -35,5 +35,11 @@ public class SchoolSubjectValidator implements Validator {
 		if(gradeA + gradeB + gradeC + gradeD + gradePF != 100) {
 			errors.rejectValue("gradePF", "invalid.grade_sum");
 		}
+		
+		schoolSubject.setGradeA(gradeA.toString());
+		schoolSubject.setGradeB(gradeB.toString());
+		schoolSubject.setGradeC(gradeC.toString());
+		schoolSubject.setGradeD(gradeD.toString());
+		schoolSubject.setGradePF(gradePF.toString());
 	}
 }
